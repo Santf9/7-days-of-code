@@ -15,7 +15,7 @@
 
 const readline = require('readline-sync')
 
-const numeroAdivinado = 8
+const numeroAdivinado = Math.floor(Math.random()*10) +1
 let intento = ''
 let acierto = false
 
