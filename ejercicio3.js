@@ -97,7 +97,7 @@ while (continuarJuego) {
 }
 
 // MOSTRAR TODAS LAS TECNOLOGIAS INGRESADAS
-console.log("¡Qur buen plan de estudios te estas armando! Aqui estan las tecnologias que quieres aprender: ")
+console.log("¡Que buen plan de estudios te estas armando! Aqui estan las tecnologias que quieres aprender: ")
 console.log("Lista de tecnologias que te gustaria aprender: ")
 
 for (let i = 0; i < tecnologias.length; i++) {
