@@ -53,6 +53,7 @@
 const readline = require('readline-sync')
 
 let frutas = []
+let verduras = []
 let lacteos = []
 let dulces = []
 let congelados = []
@@ -60,34 +61,42 @@ let comida = ''
 let categoria = ''
 
 let agregar = 'si' //Valor inicial en "Si" porque la primera vez siempre va a entrar en el while
-while(agregar != 'no') {
-    agregar = readline.question('¿Desea agregar un alimento a tu lista de compras? Responde Si o No: ')
-    while(agregar != 'no' && agregar != 'si') { //Mientras el texto leído sea diferente de "sí" y de "no", mostrar que no fue reconocido y preguntar nuevamente
+
+while(agregar !== 'no') {
+    agregar = readline.question('Desea agregar un alimento a tu lista de compras? Responde Si o No: ')
+    
+    while(agregar !== 'no' && agregar !== 'si') { //Mientras el texto leído sea diferente de "sí" y de "no", mostrar que no fue reconocido y preguntar nuevamente
         console.log('Operacion no reconocida!')
-        agregar = readline.question('¿Desea agregar un alimento a tu lista de compras? Responde Si o No: ')
+        agregar = readline.question('Desea agregar un nuevo alimento a tu lista de compras? Responde Si o No: ')
 
     }
 
     if(agregar === 'si') {
-       break
-    }
+        comida = readline.question('Que comida desea agregar?: ')
+        categoria = readline.question('En que categoria encaja esta comida?: ').toLowerCase()
+       
+        if(categoria === 'frutas') {
+            frutas.push(comida)
+        } else if(categoria === 'verduras') {
+            verduras.push(comida) 
+        
+        } else if(categoria === 'lacteos') {
+            lacteos.push(comida)
+        
+        } else if(categoria === 'dulces') {
+            dulces.push(comida)
+        
+        } else if(categoria === 'congelados') {
+            congelados.push(comida)
+            
+        } else {
+            console.log('Esa categoria no esta definida')
+        } 
+        
+        if(agregar === 'no') {
+            console.log('Terminaste de agregar alimentos')
+        }
+    }    
 }
 
-comida = readline.question('¿Que comida desea agregar?: ')
-categoria = readline.question('¿En que categoria encaja esta comida?: ')
-
-if(categoria === 'frutas') {
-    frutas.push(comida)
-} else if(categoria === 'lacteos'){
-    lacteos.push(comida)
-
-} else if (categoria === 'dulces') {
-    dulces.push(comida)
-
-} else if (categoria === 'congelados') {
-    congelados.push(comida)
-} else {
-    console.log('Esa categoria no esta definida')
-}
-
-console.log(`LISTA DE COMPRAS:\n Frutas:${frutas}\n Lacteos:${lacteos}\n Dulces:${dulces}\n Congelados:${congelados}`)
+console.log(`Su lista de compras es:\n LISTA DE COMPRAS\n FRUTAS:${frutas}\n LACTEOS:${lacteos}\n DULCES:${dulces}\n CONGELADOS:${congelados}`)
