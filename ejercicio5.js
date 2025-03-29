@@ -63,12 +63,11 @@ let categoria = ''
 let agregar = 'si' //Valor inicial en "Si" porque la primera vez siempre va a entrar en el while
 
 while(agregar !== 'no') {
-    agregar = readline.question('Desea agregar un alimento a tu lista de compras? Responde Si o No: ')
+    agregar = readline.question('Desea agregar un alimento a tu lista de compras o eliminar uno existente? Responde Si, No o Eliminar: ').toLowerCase()
     
-    while(agregar !== 'no' && agregar !== 'si') { //Mientras el texto leído sea diferente de "sí" y de "no", mostrar que no fue reconocido y preguntar nuevamente
+    while(agregar !== 'no' && agregar !== 'si' && agregar !== 'eliminar') { // Validar entrada
         console.log('Operacion no reconocida!')
-        agregar = readline.question('Desea agregar un nuevo alimento a tu lista de compras? Responde Si o No: ')
-
+        agregar = readline.question('Desea agregar un alimento a tu lista de compras o eliminar uno existente? Responde Si, No o Eliminar: ').toLowerCase()
     }
 
     if(agregar === 'si') {
@@ -79,24 +78,48 @@ while(agregar !== 'no') {
             frutas.push(comida)
         } else if(categoria === 'verduras') {
             verduras.push(comida) 
-        
         } else if(categoria === 'lacteos') {
             lacteos.push(comida)
-        
         } else if(categoria === 'dulces') {
             dulces.push(comida)
-        
         } else if(categoria === 'congelados') {
             congelados.push(comida)
-            
         } else {
             console.log('Esa categoria no esta definida')
-        } 
-        
-        if(agregar === 'no') {
-            console.log('Terminaste de agregar alimentos')
         }
-    }    
+    } else if(agregar === 'eliminar') {
+        if (frutas.length === 0 && verduras.length === 0 && lacteos.length === 0 && dulces.length === 0 && congelados.length === 0) {
+            console.log('No hay elementos en la lista para eliminar.')
+        } else {
+            console.log(`Lista actual:\n FRUTAS: ${frutas}\n VERDURAS: ${verduras}\n LACTEOS: ${lacteos}\n DULCES: ${dulces}\n CONGELADOS: ${congelados}`)
+            let eliminar = readline.question('Escribe el nombre del alimento que deseas eliminar: ')
+            let eliminado = false
+
+            // Intentar eliminar de cada categoría
+            if (frutas.includes(eliminar)) {
+                frutas.splice(frutas.indexOf(eliminar), 1)
+                eliminado = true
+            } else if (verduras.includes(eliminar)) {
+                verduras.splice(verduras.indexOf(eliminar), 1)
+                eliminado = true
+            } else if (lacteos.includes(eliminar)) {
+                lacteos.splice(lacteos.indexOf(eliminar), 1)
+                eliminado = true
+            } else if (dulces.includes(eliminar)) {
+                dulces.splice(dulces.indexOf(eliminar), 1)
+                eliminado = true
+            } else if (congelados.includes(eliminar)) {
+                congelados.splice(congelados.indexOf(eliminar), 1)
+                eliminado = true
+            }
+
+            if (eliminado) {
+                console.log(`El alimento "${eliminar}" ha sido eliminado de la lista.`)
+            } else {
+                console.log('¡No fue posible encontrar el elemento en la lista!')
+            }
+        }
+    }
 }
 
-console.log(`Su lista de compras es:\n LISTA DE COMPRAS\n FRUTAS:${frutas}\n LACTEOS:${lacteos}\n DULCES:${dulces}\n CONGELADOS:${congelados}`)
+console.log(`Su lista de compras es:\n LISTA DE COMPRAS\n FRUTAS:${frutas}\n VERDURAS:${verduras}\n LACTEOS:${lacteos}\n DULCES:${dulces}\n CONGELADOS:${congelados}`)
